@@ -1341,6 +1341,12 @@ if "arduino" in env.subst("$PIOFRAMEWORK"):
         LIBSOURCE_DIRS=[os.path.join(ARDUINO_FRAMEWORK_DIR, "libraries")]
     )
 
+if "espidf" in env.subst("$PIOFRAMEWORK"):
+    # Allow the framework to locate the dependencies
+    extra_components.append(os.path.join(
+            env.subst("$PROJECT_LIBDEPS_DIR"),
+            env.subst("$PIOENV")))
+
 print("Reading CMake configuration...")
 project_codemodel = get_cmake_code_model(
     PROJECT_DIR,
